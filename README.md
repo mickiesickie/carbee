@@ -27,8 +27,32 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Project Reflection
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Did you run into any “gotchas” along the way? If so, what were
+they and how did you address them?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    *    Pass the token without exposing it in the browser. I set a cookie with the token and recovered it on the server side.
+
+- How did you handle forms? In a largely form-driven project, would
+you do anything differently? If so, what?
+      * I would create a component with like BaseInput  in that  component I`ll cover                   handling the errors, accessibility  and be able to customize the validations
+
+- How did you handle authorization? In your ideal FE/BE scenario,
+what auth strategy would you use?
+
+  * I used a cookie to pass  the token from the client side to the server side, also After doing login the requests to the api I did in the server side using ServerSideProps  method
+
+- Is there anything you’d like to share about your project prior to
+my evaluating it?
+    * I would like to do more stuff to improve the user experience, actually that is the reason I implemented an Infiniti scroll instead of the paginator for the appoints view.
+Also was really fun to do this assessment because I believe this is the best way for to developers show their skills but no is the best piece of code I made.
+
+- How long did you spend on this exercise? If you had unlimited
+more time to spend on this, how would you spend it and how would
+you prioritize each item?
+    * I would invest more time to make a better structure of the project.
+Also, I think more about the scalability of the project and make components be more reusable.
+I`ll create a better interface for the user more attractive with a better experience
+
+Note : How am I supposed to prove myself a hero if nobody will give a chance? *HERCULES*
