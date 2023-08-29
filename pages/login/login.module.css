@@ -1,0 +1,10 @@
+.paperLogin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   height: 100vh;
+   padding: 1rem;
+}
+.loginWrapper{
+  padding: 2rem;
+}
