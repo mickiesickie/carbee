@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, ChangeEvent, FC } from 'react'
 import {
   Container,
   CssBaseline,
   MenuItem,
   Paper,
-  TextField,
-  SelectChangeEvent
+  TextField
 } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { GetServerSideProps } from 'next'
@@ -36,7 +35,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const result = await getAppoinments(params)
   const currentDate = new Date()
   currentDate.setDate(currentDate.getDate() + 2)
-  console.log('-->', dayjs(currentDate).format('YYYY-MM-DD'))
   const availabilities = await getAvailabilities({
     token: decodedToken,
     isServer: true,
@@ -52,9 +50,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 }
-
-const DashBoard = ({ decodedToken, availabilities, appointmentsServerSide, date }) => {
-   const [appointments, setAppointments] = useState(appointmentsServerSide)
+const DashBoard = ({
+  decodedToken,
+  availabilities,
+  appointmentsServerSide,
+  date
+}: {
+  decodedToken: string,
+  availabilities: Array<>
+  appointmentsServerSide: object
+  date: string
+}) => {
+  const [appointments, setAppointments] = useState(appointmentsServerSide)
   // LIST OF HOURS
 
   const [availabilitiesClient, setAvailabilitiesClient] =
@@ -70,8 +77,8 @@ const DashBoard = ({ decodedToken, availabilities, appointmentsServerSide, date 
     return availabilities
   }
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setSelectedAvailability(event.target.value as string)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSelectedAvailability(e.target.value)
   }
 
   useEffect(() => {

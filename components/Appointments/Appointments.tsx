@@ -3,9 +3,15 @@ import styles from './appointments.module.css'
 import CardAppointment from '../Card/Card'
 import { useState, useEffect } from 'react'
 import getAppoinments from '@/services/getAppointments'
-const Appointments = ({ appointments, token }) => {
+
+const Appointments = ({
+  appointments,
+  token
+}: {
+  appointments: object
+  token: string
+}) => {
   const [theAppointments, setTheAppointments] = useState(appointments)
-  console.log('apppo', appointments, token)
   const getMoreDataScrolling = async () => {
     const params = {
       token,
@@ -17,7 +23,6 @@ const Appointments = ({ appointments, token }) => {
     }
     try {
       const result = await getAppoinments(params)
-      console.log('result', result)
       setTheAppointments(prevState => {
         return {
           edges: [...prevState.edges, ...result.edges],
@@ -45,6 +50,7 @@ const Appointments = ({ appointments, token }) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
   return (
     <Paper elevation={3} className={styles.paper}>
       <Grid container spacing={2}>

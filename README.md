@@ -26,6 +26,15 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Details
+
+The way of consume APIs on the server sive is using the function getServerSideProps after recovering the token and passing as a cookie to can have access it. In that way the token is not exposed on the client side or saving in local or sessionstorage.
+
+Also we import two more libraries:
+
+1.Dayjs :  To handle the dates
+
+2. Material UI: to build more faster the UI
 
 ## Project Reflection
 
