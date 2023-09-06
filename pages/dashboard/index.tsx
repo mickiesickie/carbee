@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent, FC } from 'react'
+import { useEffect, useState, ChangeEvent } from 'react'
 import {
   Container,
   CssBaseline,
@@ -19,12 +19,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import theme from '@/config/theme'
 import dayjs from 'dayjs'
 import Appointments from '@/components/Appointments/Appointments'
+import {
+  TToken,
+  IParamsAppoinments,
+  IAvailabilitiesParams
+} from '@/app/interfaces/definitions'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = new Cookies(req, res)
-  const token = cookies.get('token')
+  const token: TToken = cookies.get('token')
   const decodedToken = decodeURIComponent(token).replaceAll('"', '')
-  const params = {
+
+  const params: IParamsAppoinments = {
     token: decodedToken,
     isServer: true,
     params: {
@@ -32,14 +38,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       after: 1
     }
   }
+
   const result = await getAppoinments(params)
-  const currentDate = new Date()
+  const currentDate: Date = new Date()
   currentDate.setDate(currentDate.getDate() + 2)
-  const availabilities = await getAvailabilities({
+  const paramsAvailiabilities: IAvailabilitiesParams = {
     token: decodedToken,
     isServer: true,
     date: dayjs(currentDate).format('YYYY-MM-DD')
-  })
+  }
+  const availabilities = await getAvailabilities(paramsAvailiabilities)
 
   return {
     props: {
@@ -56,12 +64,12 @@ const DashBoard = ({
   appointmentsServerSide,
   date
 }: {
-  decodedToken: string,
-  availabilities: Array<>
+  decodedToken: string
+  availabilities: string[]
   appointmentsServerSide: object
   date: string
 }) => {
-  const [appointments, setAppointments] = useState(appointmentsServerSide)
+  const [appointments] = useState(appointmentsServerSide)
   // LIST OF HOURS
 
   const [availabilitiesClient, setAvailabilitiesClient] =
@@ -72,6 +80,7 @@ const DashBoard = ({
   const getAvailabilitiesClient = async () => {
     const availabilities = await getAvailabilities({
       token: decodedToken,
+      isServer: false,
       date: selectedDay
     })
     return availabilities
@@ -99,9 +108,9 @@ const DashBoard = ({
             <Paper elevation={3} className={styles.paper}>
               <DatePicker
                 label="Select Date"
-                disablePast={true}
+                //disablePast={true}
                 format="YYYY-MM-DD"
-                minDate={dayjs(date)}
+                //minDate={dayjs(date)}
                 value={dayjs(selectedDay)}
                 onChange={e => setSelectedDay(dayjs(e).format('YYYY-MM-DD'))}
               />

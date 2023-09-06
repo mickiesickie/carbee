@@ -142,7 +142,6 @@ const LoginComponent = ({ hasCookie }) => {
 
 LoginComponent.getInitialProps = ({ req, res }) => {
   const isServer = !!req
-  const isBrowser = !req
   const cookies = new Cookies(req, res)
   let hasCookie = false
   if (isServer && cookies.get('token')) {

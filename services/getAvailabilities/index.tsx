@@ -1,5 +1,12 @@
-
-const getAvailabilities = async ({ token, isServer, date }) => {
+const getAvailabilities = async ({
+  token,
+  isServer,
+  date
+}: {
+  token: string
+  isServer: boolean
+  date: string | Date
+}) => {
   try {
     const response = await fetch(
       `${isServer ? process.env.BASE_URL : ''}/api/availability/${date}`,
